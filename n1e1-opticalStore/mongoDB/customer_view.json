@@ -1,0 +1,150 @@
+{
+  "collections": {
+    "providers": {
+      "bsonType": "object",
+      "required": ["name", "address", "phone_number", "nif"],
+      "properties": {
+        "name": {
+          "bsonType": "string"
+        },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        },
+        "fax": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        },
+        "nif": {
+          "bsonType": "string",
+          "pattern": "^[A-Z][0-9]{8}$"
+        },
+        "glasses": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "objectId"
+          },
+          "description": "List of glasses supplied by this provider"
+        }
+      }
+    },
+    "glasses": {
+      "bsonType": "object",
+      "required": ["brand", "graduation", "frame_type", "frame_color", "lens_color", "price", "provider_id"],
+      "properties": {
+        "brand": {
+          "bsonType": "string"
+        },
+        "graduation": {
+          "bsonType": "object",
+          "required": ["right", "left"],
+          "properties": {
+            "right": { "bsonType": "double" },
+            "left":  { "bsonType": "double" }
+          }
+        },
+        "frame_type": {
+          "bsonType": "string",
+          "enum": ["metallic", "plastic", "rimless"]
+        },
+        "frame_color": {
+          "bsonType": "string"
+        },
+        "lens_color": {
+          "bsonType": "object",
+          "required": ["right", "left"],
+          "properties": {
+            "right": { "bsonType": "string" },
+            "left":  { "bsonType": "string" }
+          }
+        },
+        "price": {
+          "bsonType": "double",
+          "minimum": 0
+        },
+        "provider_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the provider"
+        }
+      }
+    },
+    "customer": {
+      "bsonType": "object",
+      "required": ["name", "address", "phone_number", "email", "registered_at"],
+      "properties": {
+        "name": {
+          "bsonType": "string"
+        },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        },
+        "email": {
+          "bsonType": "string",
+          "pattern": "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+        },
+        "registered_at": {
+          "bsonType": "date"
+        },
+        "referred_by": {
+          "bsonType": ["string", "null"],
+          "description": "Name or reference of who referred this customer"
+        },
+        "last_shopping": {
+          "bsonType": "object",
+          "description": "Embedded last purchase details",
+          "properties": {
+            "brand":       { "bsonType": "string" },
+            "graduation": {
+              "bsonType": "object",
+              "properties": {
+                "right": { "bsonType": "double" },
+                "left":  { "bsonType": "double" }
+              }
+            },
+            "frame_type":  { "bsonType": "string" },
+            "frame_color": { "bsonType": "string" },
+            "lens_color": {
+              "bsonType": "object",
+              "properties": {
+                "right": { "bsonType": "double" },
+                "left":  { "bsonType": "double" }
+              }
+            },
+            "price": { "bsonType": "double" }
+          }
+        },
+        "order_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the order"
+        }
+      }
+    }
+  }
+}
