@@ -1,0 +1,39 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string",
+                        "minLength": {
+                            "$numberInt": "2"
+                        },
+                        "description": "Employee name, required"
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "c9bd829ff98a46e8890e6f3952bfbcd2",
+    "collectionName": "employees",
+    "type": "collection"
+}

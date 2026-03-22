@@ -1,0 +1,159 @@
+{
+  "collections": {
+    "providers": {
+      "bsonType": "object",
+      "required": ["name", "address", "phone_number", "nif"],
+      "properties": {
+        "name": {
+          "bsonType": "string",
+          "description": "Provider name, required"
+        },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$",
+          "description": "9-digit phone number"
+        },
+        "fax": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        },
+        "nif": {
+          "bsonType": "string",
+          "pattern": "^[A-Z][0-9]{8}$",
+          "description": "NIF with leading letter and 8 digits"
+        }
+      }
+    },
+    "glasses": {
+      "bsonType": "object",
+      "required": ["provider_id", "brand", "graduation", "frame_type", "frame_color", "lens_color", "price"],
+      "properties": {
+        "provider_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the provider, required"
+        },
+        "brand": {
+          "bsonType": "string",
+          "description": "Glasses brand, required"
+        },
+        "graduation": {
+          "bsonType": "object",
+          "required": ["left", "right"],
+          "properties": {
+            "left":  { "bsonType": "double", "description": "Left eye graduation" },
+            "right": { "bsonType": "double", "description": "Right eye graduation" }
+          }
+        },
+        "frame_type": {
+          "bsonType": "string",
+          "enum": ["metallic", "plastic", "rimless"],
+          "description": "Frame type: metallic, plastic or rimless"
+        },
+        "frame_color": {
+          "bsonType": "string"
+        },
+        "lens_color": {
+          "bsonType": "object",
+          "required": ["left", "right"],
+          "properties": {
+            "left":  { "bsonType": "string" },
+            "right": { "bsonType": "string" }
+          }
+        },
+        "price": {
+          "bsonType": "double",
+          "minimum": 0,
+          "description": "Price in euros, must be positive"
+        }
+      }
+    },
+    "employees": {
+      "bsonType": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "bsonType": "string",
+          "minLength": 2,
+          "description": "Employee name, required"
+        }
+      }
+    },
+    "clients": {
+      "bsonType": "object",
+      "required": ["name", "address", "phone_number", "email", "registered_at"],
+      "properties": {
+        "name": {
+          "bsonType": "string",
+          "minLength": 2,
+          "description": "Client name, required"
+        },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$",
+          "description": "9-digit phone number"
+        },
+        "email": {
+          "bsonType": "string",
+          "pattern": "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$",
+          "description": "Valid email format"
+        },
+        "registered_at": {
+          "bsonType": "date",
+          "description": "Client registration date"
+        },
+        "referred_by": {
+          "bsonType": ["objectId", "null"],
+          "description": "Optional reference to another client"
+        }
+      }
+    },
+    "sales": {
+      "bsonType": "object",
+      "required": ["client_id", "employee_id", "glasses_id", "sold_at"],
+      "properties": {
+        "client_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the client, required"
+        },
+        "employee_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the employee who made the sale, required"
+        },
+        "glasses_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the sold glasses, required"
+        },
+        "sold_at": {
+          "bsonType": "date",
+          "description": "Date and time of the sale, required"
+        }
+      }
+    }
+  }
+}
