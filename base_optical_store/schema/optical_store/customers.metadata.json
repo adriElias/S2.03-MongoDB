@@ -16,7 +16,7 @@
                         "minLength": {
                             "$numberInt": "2"
                         },
-                        "description": "Client name, required"
+                        "description": "Customer name, required"
                     },
                     "address": {
                         "bsonType": "object",
@@ -63,14 +63,14 @@
                     },
                     "registered_at": {
                         "bsonType": "date",
-                        "description": "Client registration date"
+                        "description": "Customer registration date"
                     },
                     "referred_by": {
                         "bsonType": [
                             "objectId",
                             "null"
                         ],
-                        "description": "Optional reference to another client"
+                        "description": "Optional reference to another customer"
                     }
                 }
             }
@@ -92,6 +92,6 @@
         }
     ],
     "uuid": "9b1e8b8b5b3442ed99be44bdb77aca2d",
-    "collectionName": "clients",
+    "collectionName": "customers",
     "type": "collection"
 }
