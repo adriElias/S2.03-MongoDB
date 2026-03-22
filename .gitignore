@@ -1,0 +1,44 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backups
+optical_store_backup/
+*.backup
+*.bak
+
+# Build outputs
+dist/
+build/
+out/
+
+# MongoDB
+.mongorc.js
+
+# Temporary files
+tmp/
+temp/
+*.tmp

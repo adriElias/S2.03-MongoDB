@@ -1,0 +1,51 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "client_id",
+                    "employee_id",
+                    "glasses_id",
+                    "sold_at"
+                ],
+                "properties": {
+                    "client_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the client, required"
+                    },
+                    "employee_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the employee who made the sale, required"
+                    },
+                    "glasses_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the sold glasses, required"
+                    },
+                    "sold_at": {
+                        "bsonType": "date",
+                        "description": "Date and time of the sale, required"
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "54f69c1470564c5bac98b72eef0dc3a4",
+    "collectionName": "sales",
+    "type": "collection"
+}

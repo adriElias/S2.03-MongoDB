@@ -1,0 +1,97 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "provider_id",
+                    "brand",
+                    "graduation",
+                    "frame_type",
+                    "frame_color",
+                    "lens_color",
+                    "price"
+                ],
+                "properties": {
+                    "provider_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the provider, required"
+                    },
+                    "brand": {
+                        "bsonType": "string",
+                        "description": "Glasses brand, required"
+                    },
+                    "graduation": {
+                        "bsonType": "object",
+                        "required": [
+                            "left",
+                            "right"
+                        ],
+                        "properties": {
+                            "left": {
+                                "bsonType": "double",
+                                "description": "Left eye graduation"
+                            },
+                            "right": {
+                                "bsonType": "double",
+                                "description": "Right eye graduation"
+                            }
+                        }
+                    },
+                    "frame_type": {
+                        "bsonType": "string",
+                        "enum": [
+                            "metallic",
+                            "plastic",
+                            "rimless"
+                        ],
+                        "description": "Frame type: metallic, plastic or rimless"
+                    },
+                    "frame_color": {
+                        "bsonType": "string"
+                    },
+                    "lens_color": {
+                        "bsonType": "object",
+                        "required": [
+                            "left",
+                            "right"
+                        ],
+                        "properties": {
+                            "left": {
+                                "bsonType": "string"
+                            },
+                            "right": {
+                                "bsonType": "string"
+                            }
+                        }
+                    },
+                    "price": {
+                        "bsonType": "double",
+                        "minimum": {
+                            "$numberInt": "0"
+                        },
+                        "description": "Price in euros, must be positive"
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "0513c8ca2adb4ed09338159755301da4",
+    "collectionName": "glasses",
+    "type": "collection"
+}
