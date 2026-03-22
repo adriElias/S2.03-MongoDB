@@ -115,11 +115,12 @@ mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin" \
 5. **sales** - Sales history
 
 #### Available Files:
-- `n1e1-opticalStore/mongoDB/optical_store.json` - JSON schema with validation
-- `n1e1-opticalStore/schema/optical_store/` - Exports in BSON format
+- `base_optical_store/mongoDB/optical_store.json` - JSON schema with validation
+- `base_optical_store/schema/optical_store/` - Exports in BSON format
   - `clients.bson` / `clients.metadata.json`
   - `employees.bson` / `employees.metadata.json`
   - `glasses.bson` / `glasses.metadata.json`
+  - `prelude.json` - Initial data structure
   - `providers.bson` / `providers.metadata.json`
   - `sales.bson` / `sales.metadata.json`
 
@@ -230,23 +231,33 @@ mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin" \
 
 ```
 S203-MongoDB/
-├── docker-compose.yml
-├── README.md
-└── n1e1-opticalStore/
-    ├── mongoDB/
-    │   └── optical_store.json          # Complete schema with validations
-    └── schema/
-        └── optical_store/
-            ├── providers.bson          # Providers dump
-            ├── providers.metadata.json
-            ├── glasses.bson            # Glasses dump
-            ├── glasses.metadata.json
-            ├── clients.bson            # Clients dump
-            ├── clients.metadata.json
-            ├── employees.bson          # Employees dump
-            ├── employees.metadata.json
-            ├── sales.bson              # Sales dump
-            └── sales.metadata.json
+├── .env                            # Environment configuration (gitignored)
+├── .env.example                    # Environment template
+├── .gitignore                      # Git ignore rules
+├── docker-compose.yml              # Docker compose configuration
+├── README.md                       # Main project documentation
+├── base_optical_store/             # Base implementation (Exercise 1)
+│   ├── README.md
+│   ├── doc/                        # Documentation
+│   ├── mongoDB/
+│   │   └── optical_store.json      # Complete schema with validations
+│   └── schema/
+│       └── optical_store/
+│           ├── clients.bson          # Clients dump
+│           ├── clients.metadata.json
+│           ├── employees.bson        # Employees dump
+│           ├── employees.metadata.json
+│           ├── glasses.bson          # Glasses dump
+│           ├── glasses.metadata.json
+│           ├── prelude.json          # Initial data structure
+│           ├── providers.bson        # Providers dump
+│           ├── providers.metadata.json
+│           ├── sales.bson            # Sales dump
+│           └── sales.metadata.json
+├── n1e1-opticalStore/              # Exercise 1 variant
+│   └── [similar structure to base_optical_store]
+└── n1e2-opticalStore/              # Exercise 2 variant
+    └── [similar structure to base_optical_store]
 ```
 
 ---
