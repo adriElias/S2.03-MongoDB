@@ -91,14 +91,14 @@
         }
       }
     },
-    "clients": {
+    "customers": {
       "bsonType": "object",
       "required": ["name", "address", "phone_number", "email", "registered_at"],
       "properties": {
         "name": {
           "bsonType": "string",
           "minLength": 2,
-          "description": "Client name, required"
+          "description": "customer name, required"
         },
         "address": {
           "bsonType": "object",
@@ -125,21 +125,21 @@
         },
         "registered_at": {
           "bsonType": "date",
-          "description": "Client registration date"
+          "description": "customer registration date"
         },
         "referred_by": {
           "bsonType": ["objectId", "null"],
-          "description": "Optional reference to another client"
+          "description": "Optional reference to another customer"
         }
       }
     },
     "sales": {
       "bsonType": "object",
-      "required": ["client_id", "employee_id", "glasses_id", "sold_at"],
+      "required": ["customer_id", "employee_id", "glasses_id", "sold_at"],
       "properties": {
-        "client_id": {
+        "customer_id": {
           "bsonType": "objectId",
-          "description": "Reference to the client, required"
+          "description": "Reference to the customer, required"
         },
         "employee_id": {
           "bsonType": "objectId",

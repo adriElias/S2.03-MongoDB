@@ -4,15 +4,15 @@
             "$jsonSchema": {
                 "bsonType": "object",
                 "required": [
-                    "client_id",
+                    "customer_id",
                     "employee_id",
                     "glasses_id",
                     "sold_at"
                 ],
                 "properties": {
-                    "client_id": {
+                    "customer_id": {
                         "bsonType": "objectId",
-                        "description": "Reference to the client, required"
+                        "description": "Reference to the customer, required"
                     },
                     "employee_id": {
                         "bsonType": "objectId",
