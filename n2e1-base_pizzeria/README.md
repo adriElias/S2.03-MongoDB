@@ -62,9 +62,11 @@ Create or use `.env` file in the project root:
 cp ../.env.example .env
 ```
 
-Configure MongoDB connection:
-```
-MONGO_URI=mongodb://admin:mi_password@localhost:27017/?authSource=admin
+Configure MongoDB connection with environment variables:
+```bash
+MONGO_USER=admin
+MONGO_PASSWORD=your_secure_password
+MONGO_PORT=27017
 DB_NAME=pizzeria
 ```
 
@@ -83,7 +85,12 @@ docker ps | grep mongodb
 
 **Import Database:**
 ```bash
-mongorestore --uri="mongodb://admin:mi_password@localhost:27017/?authSource=admin" \
+# Load credentials from .env
+set -a
+source .env
+set +a
+
+mongorestore --uri="mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin" \
   --nsInclude="pizzeria.*" ./pizzeria_backup
 ```
 
@@ -91,7 +98,12 @@ mongorestore --uri="mongodb://admin:mi_password@localhost:27017/?authSource=admi
 
 **Access MongoDB:**
 ```bash
-mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin"
+# Load credentials from .env
+set -a
+source .env
+set +a
+
+mongosh "mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin"
 ```
 
 **Test Collections:**
@@ -290,11 +302,13 @@ n2e1-base_pizzeria/
 ## 🔗 Database Connection
 
 ```
-URI: mongodb://admin:mi_password@localhost:27017/?authSource=admin
+URI: mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin
 Database: pizzeria
 Port: 27017
-Auth: Yes (admin/mi_password)
+Auth: Yes (configured via .env)
 ```
+
+> **Security**: Store credentials in `.env` file (gitignored). See `.env.example` for template.
 
 ---
 
@@ -311,6 +325,4 @@ Auth: Yes (admin/mi_password)
 
 ---
 
-**Last updated**: March 23, 2026  
-**Level**: 2 - Intermediate  
 **Exercise**: N2E1 - Food Delivery Platform Base Design

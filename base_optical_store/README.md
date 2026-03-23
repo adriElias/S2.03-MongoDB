@@ -81,23 +81,43 @@ docker ps | grep mongodb
 
 #### Access MongoDB (if you have mongosh installed):
 ```bash
-mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin"
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
+mongosh "mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin"
 ```
 
 #### Import data (if you have dumps):
 ```bash
-mongorestore --uri="mongodb://admin:mi_password@localhost:27017/?authSource=admin" --nsInclude="optical_store.*" ./optical_store_backup
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
+mongorestore --uri="mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin" --nsInclude="optical_store.*" ./optical_store_backup
 ```
 
 #### Export backup data:
 ```bash
-mongodump --uri="mongodb://admin:mi_password@localhost:27017/?authSource=admin" --db=optical_store --out=./optical_store_backup
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
+mongodump --uri="mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin" --db=optical_store --out=./optical_store_backup
 ```
 
 ### 4. Tests
 ```bash
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
 # Verify collections
-mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin" \
+mongosh "mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin" \
   --eval "use optical_store; db.providers.countDocuments(); db.glasses.countDocuments(); db.clients.countDocuments(); db.employees.countDocuments(); db.sales.countDocuments();"
 ```
 
@@ -266,7 +286,12 @@ S203-MongoDB/
 
 ### View database and collections
 ```bash
-mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin"
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
+mongosh "mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin"
 > use optical_store
 > show collections
 ```
@@ -296,10 +321,3 @@ docker-compose down
 ```
 
 ---
-
-## 👥 Author
-Database design exercise for optical store management.
-
----
-
-**Last updated**: March 22, 2026
