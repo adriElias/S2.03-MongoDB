@@ -1,0 +1,128 @@
+{
+  "collections": {
+    "customer": {
+      "bsonType": "object",
+      "required": ["name", "surname", "address", "phone_number"],
+      "properties": {
+        "name":    { "bsonType": "string" },
+        "surname": { "bsonType": "string" },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "town":     { "bsonType": "string" },
+            "province": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        }
+      }
+    },
+    "product": {
+      "bsonType": "object",
+      "required": ["name", "description", "image", "price"],
+      "properties": {
+        "name":        { "bsonType": "string" },
+        "description": { "bsonType": "string" },
+        "image":       { "bsonType": "string" },
+        "price": {
+          "bsonType": "decimal",
+          "minimum": 0
+        },
+        "category_pizza": {
+          "bsonType": "object",
+          "description": "Only for pizzas",
+          "required": ["id", "name"],
+          "properties": {
+            "id":   { "bsonType": "int" },
+            "name": { "bsonType": "string" }
+          }
+        }
+      }
+    },
+    "order": {
+      "bsonType": "object",
+      "required": ["products", "total_price", "customer", "delivery_type"],
+      "properties": {
+        "delivery_type": {
+          "bsonType": "string",
+          "enum": ["pickup", "delivery_in"],
+          "description": "pickup = recollida a botiga, delivery_in = lliurament a domicili"
+        },
+        "products": {
+          "bsonType": "array",
+          "minItems": 1,
+          "description": "Embedded products snapshot",
+          "items": {
+            "bsonType": "object",
+            "required": ["quantity", "product_id", "price"],
+            "properties": {
+              "quantity": {
+                "bsonType": "int",
+                "minimum": 1
+              },
+              "product_id": {
+                "bsonType": "int",
+                "description": "Reference to the product"
+              },
+              "price": {
+                "bsonType": "decimal",
+                "minimum": 0
+              },
+              "product_info": {
+                "bsonType": "object",
+                "description": "Embedded product snapshot",
+                "properties": {
+                  "name":     { "bsonType": "string" },
+                  "category": { "bsonType": "string" }
+                }
+              }
+            }
+          }
+        },
+        "total_price": {
+          "bsonType": "decimal",
+          "minimum": 0
+        },
+        "customer": {
+          "bsonType": "object",
+          "required": ["customer_id", "name"],
+          "description": "Embedded customer snapshot",
+          "properties": {
+            "customer_id": {
+              "bsonType": "int",
+              "description": "Reference to the customer"
+            },
+            "name": { "bsonType": "string" }
+          }
+        },
+        "delivery_info": {
+          "bsonType": "object",
+          "description": "Required when delivery_type is delivery_in",
+          "required": ["street", "number", "zip_code", "contact_number"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "contact_number": {
+              "bsonType": "string",
+              "pattern": "^[0-9]{9}$"
+            }
+          }
+        },
+        "note": { "bsonType": "string" }
+      }
+    }
+  }
+}

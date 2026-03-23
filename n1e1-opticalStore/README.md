@@ -201,12 +201,17 @@ n1e1-opticalStore/
 # Start MongoDB
 docker-compose up -d
 
+# Load credentials from .env
+set -a
+source ../.env
+set +a
+
 # Import data
-mongorestore --uri="mongodb://admin:mi_password@localhost:27017/?authSource=admin" \
+mongorestore --uri="mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin" \
   --nsInclude="optical_store.*" ./optical_store_backup
 
 # Test queries
-mongosh "mongodb://admin:mi_password@localhost:27017/?authSource=admin"
+mongosh "mongodb://$MONGO_USER:$MONGO_PASSWORD@localhost:27017/?authSource=admin"
 > use optical_store
 > db.clients.findOne()
 > db.sales.aggregate([
