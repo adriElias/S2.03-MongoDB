@@ -1,0 +1,78 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "image",
+                    "price",
+                    "type"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string"
+                    },
+                    "description": {
+                        "bsonType": "string"
+                    },
+                    "image": {
+                        "bsonType": "string"
+                    },
+                    "price": {
+                        "bsonType": "decimal",
+                        "minimum": {
+                            "$numberInt": "0"
+                        }
+                    },
+                    "type": {
+                        "bsonType": "string",
+                        "enum": [
+                            "pizza",
+                            "burger",
+                            "drink"
+                        ],
+                        "description": "Product type: pizza, burger or drink"
+                    },
+                    "category": {
+                        "bsonType": "object",
+                        "description": "Only for pizzas",
+                        "required": [
+                            "category_id",
+                            "name"
+                        ],
+                        "properties": {
+                            "category_id": {
+                                "bsonType": "objectId",
+                                "description": "Category identifier"
+                            },
+                            "name": {
+                                "bsonType": "string",
+                                "description": "Category name, can change over time"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "563e421e313d43c19528228e1049fd41",
+    "collectionName": "product",
+    "type": "collection"
+}

@@ -1,1 +1,81 @@
-{"options":{"validator":{"$jsonSchema":{"bsonType":"object","required":["brand","provider","price","buyers"],"properties":{"brand":{"bsonType":"string"},"provider":{"bsonType":"object","required":["provider_id","name"],"description":"Embedded provider snapshot","properties":{"provider_id":{"bsonType":"objectId","description":"Reference to the provider collection"},"name":{"bsonType":"string"}}},"price":{"bsonType":"decimal","minimum":{"$numberInt":"0"}},"buyers":{"bsonType":"array","description":"List of customers who bought these glasses","items":{"bsonType":"object","required":["customer_id","name"],"properties":{"customer_id":{"bsonType":"objectId","description":"Reference to the customer collection"},"name":{"bsonType":"string"}}}}}}},"validationLevel":"strict","validationAction":"error"},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"0f9c0cf34e88444bb4f252d42f0cf3f8","collectionName":"glasses","type":"collection"}
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "brand",
+                    "provider",
+                    "price",
+                    "buyers"
+                ],
+                "properties": {
+                    "brand": {
+                        "bsonType": "string"
+                    },
+                    "provider": {
+                        "bsonType": "object",
+                        "required": [
+                            "provider_id",
+                            "name"
+                        ],
+                        "description": "Embedded provider snapshot",
+                        "properties": {
+                            "provider_id": {
+                                "bsonType": "objectId",
+                                "description": "Reference to the provider collection"
+                            },
+                            "name": {
+                                "bsonType": "string"
+                            }
+                        }
+                    },
+                    "price": {
+                        "bsonType": "decimal",
+                        "minimum": {
+                            "$numberInt": "0"
+                        }
+                    },
+                    "buyers": {
+                        "bsonType": "array",
+                        "description": "List of customers who bought these glasses",
+                        "items": {
+                            "bsonType": "object",
+                            "required": [
+                                "customer_id",
+                                "name"
+                            ],
+                            "properties": {
+                                "customer_id": {
+                                    "bsonType": "objectId",
+                                    "description": "Reference to the customer collection"
+                                },
+                                "name": {
+                                    "bsonType": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "0f9c0cf34e88444bb4f252d42f0cf3f8",
+    "collectionName": "glasses",
+    "type": "collection"
+}

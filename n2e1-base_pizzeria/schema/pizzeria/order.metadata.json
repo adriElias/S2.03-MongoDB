@@ -1,0 +1,120 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "date_time",
+                    "type",
+                    "total_price",
+                    "products",
+                    "customer_id",
+                    "store_id"
+                ],
+                "properties": {
+                    "date_time": {
+                        "bsonType": "date",
+                        "description": "Date and time the order was placed"
+                    },
+                    "type": {
+                        "bsonType": "string",
+                        "enum": [
+                            "home_delivery",
+                            "pickup"
+                        ],
+                        "description": "home_delivery or pickup"
+                    },
+                    "total_price": {
+                        "bsonType": "decimal",
+                        "minimum": {
+                            "$numberInt": "0"
+                        }
+                    },
+                    "note": {
+                        "bsonType": "string"
+                    },
+                    "products": {
+                        "bsonType": "array",
+                        "minItems": {
+                            "$numberInt": "1"
+                        },
+                        "description": "Embedded products snapshot",
+                        "items": {
+                            "bsonType": "object",
+                            "required": [
+                                "product_id",
+                                "name",
+                                "quantity",
+                                "unit_price"
+                            ],
+                            "properties": {
+                                "product_id": {
+                                    "bsonType": "objectId"
+                                },
+                                "name": {
+                                    "bsonType": "string"
+                                },
+                                "quantity": {
+                                    "bsonType": "int",
+                                    "minimum": {
+                                        "$numberInt": "1"
+                                    }
+                                },
+                                "unit_price": {
+                                    "bsonType": "decimal",
+                                    "minimum": {
+                                        "$numberInt": "0"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "customer_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the customer"
+                    },
+                    "store_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the store"
+                    },
+                    "is_delivery": {
+                        "bsonType": "object",
+                        "description": "Only present for home_delivery orders",
+                        "required": [
+                            "delivery_driver",
+                            "date_time"
+                        ],
+                        "properties": {
+                            "delivery_driver": {
+                                "bsonType": "string",
+                                "description": "Name of the delivery driver"
+                            },
+                            "date_time": {
+                                "bsonType": "date",
+                                "description": "Date and time of delivery"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "285185f2cae042b180344d8b32d4ed2c",
+    "collectionName": "order",
+    "type": "collection"
+}
