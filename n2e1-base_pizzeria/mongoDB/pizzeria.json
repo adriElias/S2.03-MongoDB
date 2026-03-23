@@ -1,0 +1,172 @@
+{
+  "collections": {
+    "customer": {
+      "bsonType": "object",
+      "required": ["name", "surname", "address", "phone_number"],
+      "properties": {
+        "name":    { "bsonType": "string" },
+        "surname": { "bsonType": "string" },
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "floor":    { "bsonType": "string" },
+            "door":     { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "town":     { "bsonType": "string" },
+            "province": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        }
+      }
+    },
+    "store": {
+      "bsonType": "object",
+      "required": ["address", "phone_number"],
+      "properties": {
+        "address": {
+          "bsonType": "object",
+          "required": ["street", "number", "city", "zip_code", "country"],
+          "properties": {
+            "street":   { "bsonType": "string" },
+            "number":   { "bsonType": "string" },
+            "city":     { "bsonType": "string" },
+            "zip_code": { "bsonType": "string" },
+            "town":     { "bsonType": "string" },
+            "province": { "bsonType": "string" },
+            "country":  { "bsonType": "string" }
+          }
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        }
+      }
+    },
+    "employee": {
+      "bsonType": "object",
+      "required": ["name", "surname", "nif", "phone_number", "role", "store_id"],
+      "properties": {
+        "name":    { "bsonType": "string" },
+        "surname": { "bsonType": "string" },
+        "nif": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{8}[A-Z]$"
+        },
+        "phone_number": {
+          "bsonType": "string",
+          "pattern": "^[0-9]{9}$"
+        },
+        "role": {
+          "bsonType": "string",
+          "enum": ["cook", "delivery_driver"],
+          "description": "cook or delivery_driver"
+        },
+        "store_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the store"
+        }
+      }
+    },
+    "products": {
+      "bsonType": "object",
+      "required": ["name", "description", "image", "price", "type"],
+      "properties": {
+        "name":        { "bsonType": "string" },
+        "description": { "bsonType": "string" },
+        "image":       { "bsonType": "string" },
+        "price": {
+          "bsonType": "decimal",
+          "minimum": 0
+        },
+        "type": {
+          "bsonType": "string",
+          "enum": ["pizza", "burger", "drink"],
+          "description": "Product type: pizza, burger or drink"
+        },
+        "category": {
+          "bsonType": "object",
+          "description": "Only for pizzas",
+          "required": ["category_id", "name"],
+          "properties": {
+            "category_id": {
+              "bsonType": "objectId",
+              "description": "Category identifier"
+            },
+            "name": {
+              "bsonType": "string",
+              "description": "Category name, can change over time"
+            }
+          }
+        }
+      }
+    },
+    "order": {
+      "bsonType": "object",
+      "required": ["date_time", "type", "total_price", "products", "customer_id", "store_id"],
+      "properties": {
+        "date_time": {
+          "bsonType": "date",
+          "description": "Date and time the order was placed"
+        },
+        "type": {
+          "bsonType": "string",
+          "enum": ["home_delivery", "pickup"],
+          "description": "home_delivery or pickup"
+        },
+        "total_price": {
+          "bsonType": "decimal",
+          "minimum": 0
+        },
+        "note": {
+          "bsonType": "string"
+        },
+        "products": {
+          "bsonType": "array",
+          "minItems": 1,
+          "description": "Embedded products snapshot",
+          "items": {
+            "bsonType": "object",
+            "required": ["product_id", "name", "quantity", "unit_price"],
+            "properties": {
+              "product_id": { "bsonType": "objectId" },
+              "name":       { "bsonType": "string" },
+              "quantity":   { "bsonType": "int", "minimum": 1 },
+              "unit_price": { "bsonType": "decimal", "minimum": 0 }
+            }
+          }
+        },
+        "customer_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the customer"
+        },
+        "store_id": {
+          "bsonType": "objectId",
+          "description": "Reference to the store"
+        },
+        "is_delivery": {
+          "bsonType": "object",
+          "description": "Only present for home_delivery orders",
+          "required": ["delivery_driver", "date_time"],
+          "properties": {
+            "delivery_driver": {
+              "bsonType": "string",
+              "description": "Name of the delivery driver"
+            },
+            "date_time": {
+              "bsonType": "date",
+              "description": "Date and time of delivery"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,15 +4,10 @@
             "$jsonSchema": {
                 "bsonType": "object",
                 "required": [
-                    "name",
                     "address",
-                    "phone_number",
-                    "nif"
+                    "phone_number"
                 ],
                 "properties": {
-                    "name": {
-                        "bsonType": "string"
-                    },
                     "address": {
                         "bsonType": "object",
                         "required": [
@@ -29,16 +24,16 @@
                             "number": {
                                 "bsonType": "string"
                             },
-                            "floor": {
-                                "bsonType": "string"
-                            },
-                            "door": {
-                                "bsonType": "string"
-                            },
                             "city": {
                                 "bsonType": "string"
                             },
                             "zip_code": {
+                                "bsonType": "string"
+                            },
+                            "town": {
+                                "bsonType": "string"
+                            },
+                            "province": {
                                 "bsonType": "string"
                             },
                             "country": {
@@ -49,14 +44,6 @@
                     "phone_number": {
                         "bsonType": "string",
                         "pattern": "^[0-9]{9}$"
-                    },
-                    "fax": {
-                        "bsonType": "string",
-                        "pattern": "^[0-9]{9}$"
-                    },
-                    "nif": {
-                        "bsonType": "string",
-                        "pattern": "^[A-Z][0-9]{8}$"
                     }
                 }
             }
@@ -77,7 +64,7 @@
             "name": "_id_"
         }
     ],
-    "uuid": "16facd6c56d744a8b1b0d349c93366e8",
-    "collectionName": "provider",
+    "uuid": "4b2cfdd9d20f42d5b68c9a8654ba2e30",
+    "collectionName": "store",
     "type": "collection"
 }

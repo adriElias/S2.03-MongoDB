@@ -1,0 +1,63 @@
+{
+    "options": {
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "name",
+                    "surname",
+                    "nif",
+                    "phone_number",
+                    "role",
+                    "store_id"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string"
+                    },
+                    "surname": {
+                        "bsonType": "string"
+                    },
+                    "nif": {
+                        "bsonType": "string",
+                        "pattern": "^[0-9]{8}[A-Z]$"
+                    },
+                    "phone_number": {
+                        "bsonType": "string",
+                        "pattern": "^[0-9]{9}$"
+                    },
+                    "role": {
+                        "bsonType": "string",
+                        "enum": [
+                            "cook",
+                            "delivery_driver"
+                        ],
+                        "description": "cook or delivery_driver"
+                    },
+                    "store_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the store"
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    },
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        }
+    ],
+    "uuid": "2222c7ee678e457395df3f9528953f5c",
+    "collectionName": "employee",
+    "type": "collection"
+}
